@@ -13,7 +13,12 @@
 
 @interface ViewController ()<ZQPlayerDelegate>
 
+/** 视频播放器*/
 @property (nonatomic, strong) ZQPlayerMaskView *playerMaskView;
+
+
+/** 音频播放器 */
+@property (nonatomic, strong) ZQPlayer *audioPlayer;
 
 @end
 
@@ -23,20 +28,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    // 视频播放
     _playerMaskView = [[ZQPlayerMaskView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width*0.56)];
     _playerMaskView.delegate = self;
-    _playerMaskView.isWiFi = YES; // 是否允许自动加载，
+    _playerMaskView.isWiFi = NO; // 是否允许自动加载，
     [self.view addSubview:_playerMaskView];
     
+    // 网络视频
     NSString *videoUrl = @"http://183.60.197.29/17/q/t/v/w/qtvwspkejwgqjqeywjfowzdjcjvjzs/hc.yinyuetai.com/A0780162B98038FBED45554E85720E53.mp4?sc=e9bad1bb86f52b6f&br=781&vid=3192743&aid=38959&area=KR&vst=2&ptp=mv&rd=yinyuetai.com";
-    [_playerMaskView playWithVideoUrl:videoUrl]; 
+    // 本地视频
+    // NSString *videoUrl = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    [_playerMaskView playWithVideoUrl:videoUrl];
     
     [_playerMaskView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view).with.offset(100);
         make.height.equalTo(_playerMaskView.mas_width).multipliedBy(0.56);
     }];
+    
+    // 音频播放
+    NSString *mp3Url = @"http://m10.music.126.net/20180414124141/e3e56fbce547d0fabda73f65db249437/ymusic/1f36/af3d/60a8/f7ac35fcd56465570b2031b93edd2546.mp3";
+    _audioPlayer = [[ZQPlayer alloc] initWithUrl:mp3Url];
+    [_audioPlayer play];
 }
+
+
 
 #pragma mark - 屏幕旋转
 //是否自动旋转,返回YES可以自动旋转
@@ -51,11 +67,12 @@
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
 }
-// 全屏需要重写方法 用来将播放器
+// 全屏需要重写方法
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator  {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationPortrait || orientation
         == UIDeviceOrientationPortraitUpsideDown) {
+        // 隐藏导航栏
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         [_playerMaskView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.view);
@@ -63,6 +80,7 @@
             make.height.equalTo(_playerMaskView.mas_width).multipliedBy(0.56);
         }];
     }else {
+        // 显示导航栏
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         [_playerMaskView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);

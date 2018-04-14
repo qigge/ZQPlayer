@@ -14,7 +14,7 @@ typedef NS_ENUM(NSUInteger, ZQPlayerState) {
     ZQPlayerStateReadyToPlay, // 播放器准备完毕
     ZQPlayerStatePlaying, // 正在播放
     ZQPlayerStatePause, // 暂停
-    ZQPlayerStateStop, // 播放完成
+    ZQPlayerStateStop, // 播放完毕
     ZQPlayerStateBufferEmpty, // 缓冲中
     ZQPlayerStateKeepUp // 缓冲完成
 };
@@ -70,12 +70,12 @@ typedef NS_ENUM(NSUInteger, ZQPlayerState) {
 
 /** 视频音频长度 */
 @property (nonatomic, assign) CGFloat timeInterval;
-
+/** 代理 */
 @property (nonatomic, weak) id<ZQPlayerDelegate> delegate;
 
 // 播放器
-@property (nonatomic ,strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerItem *playerItme;
-@property (nonatomic,strong) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
 
 @end
