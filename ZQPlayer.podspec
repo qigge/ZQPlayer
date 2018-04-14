@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ZQPlayer"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "一个基于AVPlayer封装的视频、音频播放器"
 
   # This description is used to generate tags and improve search results.
@@ -64,8 +64,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -92,7 +91,6 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "ZQPlayer", "ZQPlayer/**/*.{h,m}"
-  s.exclude_files = "demo/ZQVideoPlayer"
 
   # s.public_header_files = "Classes/**/*.h"
 
@@ -105,8 +103,7 @@ Pod::Spec.new do |s|
   #  non-essential files like tests, examples and documentation.
   #
 
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
+ s.resources  = "ZQPlayer/ZQPlayerImage.bundle"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
@@ -130,7 +127,7 @@ Pod::Spec.new do |s|
   #  where they will only apply to your library. If you depend on other Podspecs
   #  you can include multiple dependencies to ensure it works.
 
-  # s.requires_arc = true
+ s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "Masonry"
