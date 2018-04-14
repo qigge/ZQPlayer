@@ -105,33 +105,33 @@
     }];
     
     [_playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_bottomView).with.offset(20);
-        make.bottom.equalTo(_bottomView).with.offset(-10);
+        make.left.equalTo(self.bottomView).with.offset(20);
+        make.bottom.equalTo(self.bottomView).with.offset(-10);
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
     [_currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_playBtn.mas_right).with.offset(10);
-        make.centerY.equalTo(_playBtn);
+        make.left.equalTo(self.playBtn.mas_right).with.offset(10);
+        make.centerY.equalTo(self.playBtn);
         make.width.mas_equalTo(38);
     }];
     
     [_fullBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_bottomView).with.offset(-20);
-        make.centerY.equalTo(_playBtn);
+        make.right.equalTo(self.bottomView).with.offset(-20);
+        make.centerY.equalTo(self.playBtn);
     }];
     [_totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_fullBtn.mas_left).with.offset(-10);
-        make.centerY.equalTo(_playBtn);
+        make.right.equalTo(self.fullBtn.mas_left).with.offset(-10);
+        make.centerY.equalTo(self.playBtn);
     }];
     [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_currentTimeLabel.mas_right).with.offset(10);
-        make.right.equalTo(_totalTimeLabel.mas_left).with.offset(-10);
-        make.centerY.equalTo(_playBtn);
+        make.left.equalTo(self.currentTimeLabel.mas_right).with.offset(10);
+        make.right.equalTo(self.totalTimeLabel.mas_left).with.offset(-10);
+        make.centerY.equalTo(self.playBtn);
     }];
     [_videoSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_currentTimeLabel.mas_right).with.offset(10);
-        make.right.equalTo(_totalTimeLabel.mas_left).with.offset(-10);
-        make.centerY.equalTo(_playBtn).with.offset(-1);
+        make.left.equalTo(self.currentTimeLabel.mas_right).with.offset(10);
+        make.right.equalTo(self.totalTimeLabel.mas_left).with.offset(-10);
+        make.centerY.equalTo(self.playBtn).with.offset(-1);
     }];
     [_loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
@@ -166,12 +166,12 @@
                                                                         message:@"您正处于移动网络环境下，是否要使用流量播放"
                                                                  preferredStyle:UIAlertControllerStyleAlert];
         [alertC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            _isWiFi = YES;
-            [_player nextWithUrl:_playUrl];
-            [_player play];
+            self.isWiFi = YES;
+            [self.player nextWithUrl:self->_playUrl];
+            [self.player play];
         }]];
         [alertC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            _playBtn.selected = NO;
+            self.playBtn.selected = NO;
         }]];
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alertC animated:YES completion:nil];
     }
@@ -316,7 +316,7 @@
 // 是否显示控件
 - (void)showOrHideWith:(BOOL)isShow {
     [UIView animateWithDuration:0.3 animations:^{
-        _bottomView.hidden = !isShow;
+        self.bottomView.hidden = !isShow;
     }];
     // 判断横屏还是竖屏 ，横屏显示返回按钮
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
@@ -565,7 +565,7 @@
         _loadingView.layer.cornerRadius = 7;
         [_loadingView addSubview:self.loadingImage];
         [_loadingImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(_loadingView);
+            make.center.equalTo(self->_loadingView);
             make.size.mas_equalTo(CGSizeMake(31, 31));
         }];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(play)];
