@@ -29,7 +29,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterPlayGround) name:UIApplicationDidBecomeActiveNotification object:nil];
         
         _isPlaying = NO;
-        [self nextWithUrl:@""];
+        
+        _player = [AVPlayer playerWithPlayerItem:_playerItme];
+        _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
+        _playerLayer.videoGravity = AVLayerVideoGravityResize;
     }
     return self;
 }
@@ -61,13 +64,7 @@
     }
     AVAsset *asset = [AVAsset assetWithURL:videoUrl];
     _playerItme = [AVPlayerItem playerItemWithAsset:asset];
-    if (_player) {
-        [_player replaceCurrentItemWithPlayerItem:_playerItme];
-    }else {
-        _player = [AVPlayer playerWithPlayerItem:_playerItme];
-        _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-        _playerLayer.videoGravity = AVLayerVideoGravityResize;
-    }
+    [_player replaceCurrentItemWithPlayerItem:_playerItme];
     
     // AVPlayer播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:_playerItme];
@@ -159,10 +156,7 @@
 }
 // 应用进入前台
 - (void)appDidEnterPlayGround {
-//    [_player pause];
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
-//        [self.delegate ZQPlayerStateChange:self state:ZQPlayerStatePause];
-//    }
+
 }
 
 #pragma mark - KVO

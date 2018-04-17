@@ -329,6 +329,9 @@
 
 // 开始加载
 - (void)startLoading {
+    if (!_player.isPlaying) {
+        return;
+    }
     if (_hideBottomTimer) {
         [_hideBottomTimer invalidate];
         _hideBottomTimer = nil;
@@ -351,11 +354,12 @@
 }
 // 加载完成
 - (void)stopLoading {
-    // 自动隐藏控件
-    [self hidePlayerSubviewWithTimer];
-    
-    self.loadingView.hidden = YES;
-    [self.loadingImage.layer removeAnimationForKey:@"loading"];
+    if (_player.isPlaying) {
+        self.loadingView.hidden = YES;
+        [self.loadingImage.layer removeAnimationForKey:@"loading"];
+        // 自动隐藏控件
+        [self hidePlayerSubviewWithTimer];
+    }
 }
 
 // 4秒后自动隐藏底部视图
@@ -577,6 +581,7 @@
     if (!_loadingImage ){
         _loadingImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 31, 31)];
         _loadingImage.image = [self imagesNamedFromCustomBundle:@"icon_video_play"];
+        _loadingImage.userInteractionEnabled = YES;
     }
     return _loadingImage;
 }
