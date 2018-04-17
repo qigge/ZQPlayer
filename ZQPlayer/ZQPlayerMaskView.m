@@ -46,19 +46,13 @@
 
 @implementation ZQPlayerMaskView
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _isDragSlider = NO;
-        _isWiFi = YES;
-    }
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor lightGrayColor];
+        
+        _isDragSlider = NO;
+        _isWiFi = YES;
+        
         [self setUI];
     }
     return self;
