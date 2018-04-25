@@ -48,7 +48,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = [UIColor blackColor];
         
         _isDragSlider = NO;
         _isWiFi = YES;
