@@ -27,13 +27,12 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
         // app进入前台
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterPlayGround) name:UIApplicationDidBecomeActiveNotification object:nil];
-        // 异常中断
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pause) name:AVPlayerItemPlaybackStalledNotification object:nil];
+        
         _isPlaying = NO;
         
         _player = [AVPlayer playerWithPlayerItem:_playerItme];
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-        _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        _playerLayer.videoGravity = AVLayerVideoGravityResize;
     }
     return self;
 }
@@ -63,10 +62,8 @@
     }else {
         videoUrl = [NSURL fileURLWithPath:url];
     }
-    _playerItme = [AVPlayerItem playerItemWithURL:videoUrl];
-    if (@available(iOS 9.0, *)) {
-        _playerItme.canUseNetworkResourcesForLiveStreamingWhilePaused = YES;
-    } 
+    AVAsset *asset = [AVAsset assetWithURL:videoUrl];
+    _playerItme = [AVPlayerItem playerItemWithAsset:asset];
     [_player replaceCurrentItemWithPlayerItem:_playerItme];
     
     // AVPlayer播放完成通知
@@ -180,18 +177,21 @@
             }
         }else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
             // 当缓冲是空的时候
+            if (_playerItme.playbackBufferEmpty) {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
+                    [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateBufferEmpty];
+                }
+            }
         }else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
-            //isPlaybackBufferEmpty这个属性不准，所以检查缓冲的时间
-            __block BOOL isBufferEmpty = YES;
-            NSArray * timeRangeArray = _playerItme.loadedTimeRanges;
-            CMTime currentTime = _playerItme.currentTime;
-            [timeRangeArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                CMTimeRange aTimeRange = [[timeRangeArray objectAtIndex:0] CMTimeRangeValue];
-                if(CMTimeRangeContainsTime(aTimeRange, currentTime) && CMTimeGetSeconds(aTimeRange.duration) > 0.1)
-                    (void)(isBufferEmpty = NO), *stop = YES;
-            }];
-            if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
-                [self.delegate ZQPlayerStateChange:self state:isBufferEmpty? ZQPlayerStateBufferEmpty:ZQPlayerStateKeepUp];
+            // 当缓冲好的时候
+            if (_playerItme.playbackLikelyToKeepUp){
+                if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
+                    [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateKeepUp];
+                }
+            }else {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
+                    [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateBufferEmpty];
+                }
             }
         }
     }

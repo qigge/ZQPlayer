@@ -31,11 +31,11 @@
     // 视频播放
     _playerMaskView = [[ZQPlayerMaskView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width*0.56)];
     _playerMaskView.delegate = self;
-    _playerMaskView.isWiFi = YES; // 是否允许自动加载，
+    _playerMaskView.isWiFi = NO; // 是否允许自动加载，
     [self.view addSubview:_playerMaskView];
     
     // 网络视频
-    NSString *videoUrl = @"http://220.170.49.104/13/h/g/h/u/hghumdhsmfhebwbhqbkluuxijccqdg/hc.yinyuetai.com/07350162CEBBD913D20F2F340BEE6084.mp4?sc=16011da08ddd8dc9&br=784&vid=3195269&aid=37&area=HT&vst=0&ptp=mv&rd=yinyuetai.com";
+    NSString *videoUrl = @"http://183.60.197.29/17/q/t/v/w/qtvwspkejwgqjqeywjfowzdjcjvjzs/hc.yinyuetai.com/A0780162B98038FBED45554E85720E53.mp4?sc=e9bad1bb86f52b6f&br=781&vid=3192743&aid=38959&area=KR&vst=2&ptp=mv&rd=yinyuetai.com";
     // 本地视频
     // NSString *videoUrl = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
     [_playerMaskView playWithVideoUrl:videoUrl];
@@ -47,9 +47,9 @@
     }];
     
     // 音频播放
-//    NSString *mp3Url = @"http://m10.music.126.net/20180414124141/e3e56fbce547d0fabda73f65db249437/ymusic/1f36/af3d/60a8/f7ac35fcd56465570b2031b93edd2546.mp3";
-//    _audioPlayer = [[ZQPlayer alloc] initWithUrl:mp3Url];
-//    [_audioPlayer play];
+    NSString *mp3Url = @"http://m10.music.126.net/20180414124141/e3e56fbce547d0fabda73f65db249437/ymusic/1f36/af3d/60a8/f7ac35fcd56465570b2031b93edd2546.mp3";
+    _audioPlayer = [[ZQPlayer alloc] initWithUrl:mp3Url];
+    [_audioPlayer play];
 }
 
 
