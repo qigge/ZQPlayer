@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ZQPlayer"
-  s.version      = "0.0.6"
+  s.version      = "0.0.8"
   s.summary      = "一个基于AVPlayer封装的视频、音频播放器"
 
   # This description is used to generate tags and improve search results.
