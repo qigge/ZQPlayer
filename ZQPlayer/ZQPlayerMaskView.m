@@ -199,7 +199,7 @@
     NSInteger proSec = (NSInteger)current%60;
     //分钟
     NSInteger proMin = (NSInteger)current/60;
-    _currentTimeLabel.text = [NSString stringWithFormat:@"%02zd:%02zd", proMin, proSec];
+    _currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
     
 }
 // slider结束滑动事件
@@ -279,7 +279,7 @@
     NSInteger proSec = (NSInteger)time%60;
     //分钟
     NSInteger proMin = (NSInteger)time/60;
-    _totalTimeLabel.text = [NSString stringWithFormat:@"%02zd:%02zd", proMin, proSec];
+    _totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
 }
 
 /**
@@ -304,7 +304,7 @@
     NSInteger proSec = (NSInteger)time%60;
     //分钟
     NSInteger proMin = (NSInteger)time/60;
-    _currentTimeLabel.text    = [NSString stringWithFormat:@"%02zd:%02zd", proMin, proSec];
+    _currentTimeLabel.text    = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
 }
 #pragma mark - Events
 // 是否显示控件
