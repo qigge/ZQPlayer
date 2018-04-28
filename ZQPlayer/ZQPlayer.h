@@ -68,6 +68,9 @@ typedef NS_ENUM(NSUInteger, ZQPlayerState) {
 // 是否正在播放
 @property (nonatomic, assign, readonly) BOOL isPlaying;
 
+// 是否在缓冲
+@property (nonatomic, assign, readonly) BOOL isBuffering;
+
 /** 视频音频长度 */
 @property (nonatomic, assign) CGFloat timeInterval;
 /** 代理 */

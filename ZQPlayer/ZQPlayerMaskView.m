@@ -135,7 +135,11 @@
 }
 #pragma mark - public method
 - (void)playWithVideoUrl:(NSString *)videoUrl {
-    if (videoUrl && videoUrl.length > 0) {
+    if (videoUrl && videoUrl.length > 0 && ![_playUrl isEqualToString:videoUrl]) {
+        
+        self.videoSlider.value = 0;
+        _currentTimeLabel.text = @"00:00";
+        
         _playUrl = videoUrl;
         if (_isWiFi) {
             [_player nextWithUrl:videoUrl];
@@ -243,8 +247,12 @@
     }
     if (state == ZQPlayerStatePlaying) {
         _playBtn.selected = YES;
-        self.loadingView.hidden = YES;
-        [self hidePlayerSubviewWithTimer];
+        if (_player.isBuffering) {
+            [self startLoading];
+        }else {
+            self.loadingView.hidden = YES;
+            [self hidePlayerSubviewWithTimer];
+        }
     }
     else if (state == ZQPlayerStatePause) {
         _playBtn.selected = NO;
@@ -348,6 +356,9 @@
 }
 // 加载完成
 - (void)stopLoading {
+    if (!_player.isPlaying) {
+        return;
+    }
     if (_player.isPlaying) {
         self.loadingView.hidden = YES;
         [self.loadingImage.layer removeAnimationForKey:@"loading"];

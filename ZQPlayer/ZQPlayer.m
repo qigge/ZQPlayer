@@ -12,6 +12,8 @@
 
 // 是否正在播放
 @property (nonatomic, assign) BOOL isPlaying;
+// 是否在缓冲
+@property (nonatomic, assign) BOOL isBuffering;
 
 /** player 时间监听 */
 @property (nonatomic,strong) id playerTimeObserver;
@@ -23,6 +25,13 @@
 #pragma mark - Public Method
 - (instancetype)init {
     if (self = [super init]) {
+        
+        // 打断
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+        [[AVAudioSession sharedInstance]
+         setCategory: AVAudioSessionCategorySoloAmbient
+         error: nil];
+        
         // app退到后台
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
         // app进入前台
@@ -182,16 +191,18 @@
             // 当缓冲是空的时候
         }else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
             //isPlaybackBufferEmpty这个属性不准，所以检查缓冲的时间
-            __block BOOL isBufferEmpty = YES;
-            NSArray * timeRangeArray = _playerItme.loadedTimeRanges;
-            CMTime currentTime = _playerItme.currentTime;
-            [timeRangeArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                CMTimeRange aTimeRange = [[timeRangeArray objectAtIndex:0] CMTimeRangeValue];
-                if(CMTimeRangeContainsTime(aTimeRange, currentTime) && CMTimeGetSeconds(aTimeRange.duration) > 0.1)
-                    (void)(isBufferEmpty = NO), *stop = YES;
-            }];
+            _isBuffering = !_playerItme.playbackLikelyToKeepUp;
+            if (_isBuffering) {
+                NSArray * timeRangeArray = _playerItme.loadedTimeRanges;
+                CMTime currentTime = _playerItme.currentTime;
+                [timeRangeArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    CMTimeRange aTimeRange = [[timeRangeArray objectAtIndex:0] CMTimeRangeValue];
+                    if(CMTimeRangeContainsTime(aTimeRange, currentTime) && CMTimeGetSeconds(aTimeRange.duration) > 0.1)
+                        (void)(self->_isBuffering = NO), *stop = YES;
+                }];
+            }
             if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
-                [self.delegate ZQPlayerStateChange:self state:isBufferEmpty? ZQPlayerStateBufferEmpty:ZQPlayerStateKeepUp];
+                [self.delegate ZQPlayerStateChange:self state:_isBuffering?ZQPlayerStateBufferEmpty:ZQPlayerStateKeepUp];
             }
         }
     }
@@ -206,6 +217,9 @@
     [self.playerItme removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [self.playerItme removeObserver:self forKeyPath:@"playbackBufferEmpty"];
     [self.playerItme removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    
+    // 恢复其他音频
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 }
 
 
