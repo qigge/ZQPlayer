@@ -36,9 +36,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
         // app进入前台
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterPlayGround) name:UIApplicationDidBecomeActiveNotification object:nil];
-        // 异常中断
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pause) name:AVPlayerItemPlaybackStalledNotification object:nil];
+
         _isPlaying = NO;
+        _isBuffering = YES;
         
         _player = [AVPlayer playerWithPlayerItem:_playerItme];
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
@@ -90,6 +90,7 @@
     // Will warn you when your buffer is good to go again.
     [_playerItme addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     _player.rate=1.0;
+    
     if (_isPlaying) {
         [_player play];
     }else {
@@ -190,16 +191,10 @@
         }else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
             // 当缓冲是空的时候
         }else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
-            //isPlaybackBufferEmpty这个属性不准，所以检查缓冲的时间
-            _isBuffering = !_playerItme.playbackLikelyToKeepUp;
-            if (_isBuffering) {
-                NSArray * timeRangeArray = _playerItme.loadedTimeRanges;
-                CMTime currentTime = _playerItme.currentTime;
-                [timeRangeArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    CMTimeRange aTimeRange = [[timeRangeArray objectAtIndex:0] CMTimeRangeValue];
-                    if(CMTimeRangeContainsTime(aTimeRange, currentTime) && CMTimeGetSeconds(aTimeRange.duration) > 0.1)
-                        (void)(self->_isBuffering = NO), *stop = YES;
-                }];
+            if (!_playerItme.playbackLikelyToKeepUp) {
+                _isBuffering = YES;
+            }else {
+                _isBuffering = NO;
             }
             if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
                 [self.delegate ZQPlayerStateChange:self state:_isBuffering?ZQPlayerStateBufferEmpty:ZQPlayerStateKeepUp];
