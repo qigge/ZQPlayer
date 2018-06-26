@@ -62,6 +62,15 @@
     _player.playerLayer.frame = self.bounds;
 }
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.backgroundColor = [UIColor blackColor];
+    
+    _isDragSlider = NO;
+    _isWiFi = YES;
+    [self setUI];
+}
+
 - (void)setUI {
     // 添加平移手势，用来控制音量、亮度、快进快退
     _pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
