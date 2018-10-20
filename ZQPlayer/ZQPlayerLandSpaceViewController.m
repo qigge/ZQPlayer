@@ -1,19 +1,48 @@
 //
-//  ZQPlayerMaskView.m
-//  ZQPlayer
+//  ZQPlayerLandSpaceViewController.m
+//  ZQVideoPlayer
 //
-//  Created by wang on 2018/3/16.
-//  Copyright © 2018年 qigge. All rights reserved.
+//  Created by wang on 2018/10/20.
+//  Copyright © 2018 wang. All rights reserved.
 //
 
-#import "ZQPlayerMaskView.h"
+#import "ZQPlayerLandSpaceViewController.h"
 
 #import <Masonry.h>
+#import <ZQPlayer.h>
 
-@interface ZQPlayerMaskView ()<ZQPlayerDelegate,UIGestureRecognizerDelegate> {
-    NSString *_playUrl;
+@interface ZQPlayerLandSpaceViewController ()<ZQPlayerDelegate,UIGestureRecognizerDelegate>
+{
     BOOL _isDragSlider;
 }
+
+/** 播放器 */
+@property (nonatomic, strong) ZQPlayer *player;
+
+// 控件
+/** 顶部包含，返回按钮，标题等视图 */
+@property (nonatomic, strong) UIView *topView;
+/** 标题 */
+@property (nonatomic, strong) UILabel *titleLab;
+/** 返回按钮 */
+@property (nonatomic, strong) UIButton *backBtn;
+/** 底部包含，播放、当前时间、总时间、进度条等视图 */
+@property (nonatomic, strong) UIView *bottomView;
+/** 播放按钮 */
+@property (nonatomic, strong) UIButton *playBtn;
+/** 当前时间 */
+@property (nonatomic, strong) UILabel *currentTimeLabel;
+/** 总时间 */
+@property (nonatomic, strong) UILabel *totalTimeLabel;
+/** 加载进度条 */
+@property (nonatomic, strong) UIProgressView *progressView;
+/** 视频播放进度条 */
+@property (nonatomic, strong) UISlider *videoSlider;
+
+/** 加载中View */
+@property (nonatomic, strong) UIView *loadingView;
+@property (nonatomic, strong) UIImageView *loadingImage;
+
 
 /** bottom渐变层*/
 @property (nonatomic, strong) CAGradientLayer *bottomGradientLayer;
@@ -28,82 +57,77 @@
 @property(nonatomic, strong) UITapGestureRecognizer *sliderTap; // 视频播放进度条点击快进、快退手势
 @property(nonatomic, strong) UITapGestureRecognizer *tap; // 点击显示控件手势
 
-/** 加载中View */
-@property (nonatomic, strong) UIView *loadingView;
-@property (nonatomic, strong) UIImageView *loadingImage;
-
 @end
 
+@implementation ZQPlayerLandSpaceViewController
 
-@implementation ZQPlayerMaskView
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor blackColor];
-        
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
         _isDragSlider = NO;
         _isWiFi = YES;
-        
-        [self setUI];
-        
-        [self initCAGradientLayer];
-        
-        [self cofigGestureRecognizer];
     }
     return self;
 }
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    _player.playerLayer.frame = self.bounds;
-    
-    _topGradientLayer.frame = self.topView.bounds;
-    _bottomGradientLayer.frame = self.bottomView.bounds;
-}
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    self.backgroundColor = [UIColor blackColor];
-    
-    _isDragSlider = NO;
-    _isWiFi = YES;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
     [self setUI];
     
     [self initCAGradientLayer];
     
     [self cofigGestureRecognizer];
+    
+    self.videoSlider.value = 0;
+    _currentTimeLabel.text = @"00:00";
+    
+    if (_isWiFi) {
+        [_player nextWithUrl:self.videoUrl];
+        [_player play];
+    }
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    _player.playerLayer.frame = self.view.bounds;
+    _topGradientLayer.frame = self.topView.bounds;
+    _bottomGradientLayer.frame = self.bottomView.bounds;
+}
+
+
 - (void)setUI {
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
     
-    [self addSubview:self.backgroundImage];
-    
-    self.player.playerLayer.frame = self.bounds;
-    if (![self.layer.sublayers containsObject:self.player.playerLayer]) {
-        [self.layer addSublayer:self.player.playerLayer];
+    self.player.playerLayer.frame = self.view.bounds;
+    if (![self.view.layer.sublayers containsObject:self.player.playerLayer]) {
+        [self.view.layer addSublayer:self.player.playerLayer];
     }
     
-    [self addSubview:self.topView];
+    [self.view addSubview:self.topView];
     [_topView addSubview:self.titleLab];
     [_topView addSubview:self.backBtn];
+    self.titleLab.text = self.videoTitle;
     
-    [self addSubview:self.bottomView];
+    [self.view addSubview:self.bottomView];
     [_bottomView addSubview:self.playBtn];
     [_bottomView addSubview:self.currentTimeLabel];
-    [_bottomView addSubview:self.fullBtn];
     [_bottomView addSubview:self.progressView];
     [_bottomView addSubview:self.videoSlider];
     [_bottomView addSubview:self.totalTimeLabel];
-    [self addSubview:self.loadingView];
+    [self.view addSubview:self.loadingView];
     
     [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self);
+        make.left.right.top.equalTo(self.view);
         make.height.mas_equalTo(30);
     }];
     
     [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).with.offset(5);
-        make.top.equalTo(self).with.offset(0);
+        make.left.equalTo(self.topView).with.offset(5);
+        make.top.equalTo(self.topView).with.offset(0);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -111,7 +135,7 @@
     }];
     
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self);
+        make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(40);
     }];
     
@@ -125,14 +149,8 @@
         make.centerY.equalTo(self.playBtn);
         make.width.mas_equalTo(38);
     }];
-    
-    [_fullBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bottomView).with.offset(-20);
-        make.centerY.equalTo(self.playBtn);
-        make.size.mas_equalTo(CGSizeMake(25, 25));
-    }];
     [_totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.fullBtn.mas_left).with.offset(-10);
+        make.right.equalTo(self.view).with.offset(-20);
         make.centerY.equalTo(self.playBtn);
     }];
     [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -146,8 +164,8 @@
         make.centerY.equalTo(self.playBtn).with.offset(-1);
     }];
     [_loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.centerY.equalTo(self).with.offset(10);
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view).with.offset(10);
         make.size.mas_equalTo(CGSizeMake(90, 70));
     }];
 }
@@ -155,11 +173,11 @@
 - (void)cofigGestureRecognizer {
     // 添加平移手势，用来控制音量、亮度、快进快退
     _pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
-    [self addGestureRecognizer:_pan];
+    [self.view addGestureRecognizer:_pan];
     
     _tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showOrHidden:)];
     _tap.delegate = self;
-    [self addGestureRecognizer:_tap];
+    [self.view addGestureRecognizer:_tap];
     
     _sliderTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapSlider:)];
     _sliderTap.delegate = self;
@@ -198,19 +216,6 @@
 #pragma mark - public method
 
 
-- (void)playWithVideoUrl:(NSString *)videoUrl {
-    if (videoUrl && videoUrl.length > 0 && ![_playUrl isEqualToString:videoUrl]) {
-        
-        self.videoSlider.value = 0;
-        _currentTimeLabel.text = @"00:00";
-        
-        _playUrl = videoUrl;
-        if (_isWiFi) {
-            [_player nextWithUrl:videoUrl];
-            [_player play];
-        }
-    }
-}
 
 #pragma mark - private method
 // 从ZQPlayerImage.bundle 中加载图片
@@ -229,7 +234,7 @@
                                                                  preferredStyle:UIAlertControllerStyleAlert];
         [alertC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             self.isWiFi = YES;
-            [self.player nextWithUrl:self->_playUrl];
+            [self.player nextWithUrl:self.videoUrl];
             [self.player play];
         }]];
         [alertC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -244,7 +249,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if (_tap == gestureRecognizer) {
-        return self == touch.view;
+        return self.view == touch.view;
     }
     return YES;
 }
@@ -253,7 +258,7 @@
     if (_sliderTap == gestureRecognizer) {
         return _videoSlider == gestureRecognizer.view;
     }else {
-        return self == gestureRecognizer.view;
+        return self.view == gestureRecognizer.view;
     }
 }
 
@@ -315,9 +320,6 @@
  @param state 状态
  */
 - (void)ZQPlayerStateChange:(ZQPlayer *)player state:(ZQPlayerState)state {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
-        [self.delegate ZQPlayerStateChange:player state:state];
-    }
     if (state == ZQPlayerStatePlaying) {
         _playBtn.selected = YES;
         if (_player.isBuffering) {
@@ -353,9 +355,6 @@
  视频源开始加载后调用 ，返回视频的长度
  */
 - (void)ZQPlayerTotalTime:(ZQPlayer *)player totalTime:(CGFloat)time {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerTotalTime:totalTime:)]) {
-        [self.delegate ZQPlayerTotalTime:player totalTime:time];
-    }
     //秒数
     NSInteger proSec = (NSInteger)time%60;
     //分钟
@@ -367,9 +366,6 @@
  视频源加载时调用 ，返回视频的缓冲长度
  */
 - (void)ZQPlayerLoadTime:(ZQPlayer *)player loadTime:(CGFloat)time {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerLoadTime:loadTime:)]) {
-        [self.delegate ZQPlayerLoadTime:player loadTime:time];
-    }
     // 判断视频长度
     if (player.timeInterval > 0) {
         [_progressView setProgress:time / player.timeInterval animated:YES];
@@ -380,9 +376,6 @@
  播放时调用，返回当前时间
  */
 - (void)ZQPlayerCurrentTime:(ZQPlayer *)player currentTime:(CGFloat)time {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerCurrentTime:currentTime:)]) {
-        [self.delegate ZQPlayerCurrentTime:player currentTime:time];
-    }
     [self.videoSlider setValue:time/player.timeInterval animated:YES];
     //秒数
     NSInteger proSec = (NSInteger)time%60;
@@ -394,16 +387,12 @@
 // 是否显示控件
 - (void)showOrHideWith:(BOOL)isShow {
     [UIView animateWithDuration:0.3 animations:^{
-        self.bottomView.hidden = !isShow;
-        self.topView.hidden = !isShow;
+        for (UIView *view in self.view.subviews) {
+            if (![view isEqual:self.loadingView]) {
+                view.hidden = !isShow;
+            }
+        }
     }];
-    // 判断横屏还是竖屏 ，横屏显示返回按钮
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
-        _backBtn.hidden = YES;
-    }else {
-        _backBtn.hidden = !isShow;
-    }
 }
 
 // 开始加载
@@ -493,7 +482,7 @@
 }
 //添加平移手势  快进快退
 - (void)panDirection:(UIPanGestureRecognizer *)pan {
-    CGPoint veloctyPoint = [pan velocityInView:self];
+    CGPoint veloctyPoint = [pan velocityInView:self.view];
     // 判断是垂直移动还是水平移动
     switch (pan.state) {
         case UIGestureRecognizerStateBegan:{ // 开始移动
@@ -536,28 +525,30 @@
         [self playWithJudgeNet];
     }
 }
-/** 全屏 和退出全屏 */
-- (void)videoFullAction {
-    UIDeviceOrientation orientation;
-    
-    UIInterfaceOrientation orgOrientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (orgOrientation == UIInterfaceOrientationPortrait || orgOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        orientation = UIDeviceOrientationLandscapeLeft;
-        _backBtn.hidden = NO;
+
+- (void)popbackAction{
+    if (self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
     }else {
-        orientation = UIDeviceOrientationPortrait;
-        _backBtn.hidden = YES;
-    }
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        SEL selector             = NSSelectorFromString(@"setOrientation:");
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-        [invocation setSelector:selector];
-        [invocation setTarget:[UIDevice currentDevice]];
-        int val                  = orientation;
-        [invocation setArgument:&val atIndex:2];
-        [invocation invoke];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
+
+#pragma mark - 屏幕旋转
+
+-(BOOL)shouldAutorotate {
+    return YES;
+}
+//当前支持的旋转类型
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+}
+// 默认进去类型
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationLandscapeLeft;
+}
+
 
 #pragma mark - Getter & Setter
 
@@ -582,10 +573,8 @@
 - (UIButton *)backBtn {
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backBtn.hidden = YES;
-        _backBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         [_backBtn setImage:[self imagesNamedFromCustomBundle:@"icon_back_white"] forState:UIControlStateNormal];
-        [_backBtn addTarget:self action:@selector(videoFullAction) forControlEvents:UIControlEventTouchUpInside];
+        [_backBtn addTarget:self action:@selector(popbackAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
 }
@@ -598,15 +587,6 @@
         [_playBtn addTarget:self action:@selector(startAndPause:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playBtn;
-}
-- (UIButton *)fullBtn {
-    if (!_fullBtn) {
-        _fullBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _fullBtn.frame = CGRectMake(0, 0, 21, 21);
-        [_fullBtn setImage:[self imagesNamedFromCustomBundle:@"icon_video_fullscreen"] forState:UIControlStateNormal];
-        [_fullBtn addTarget:self action:@selector(videoFullAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _fullBtn;
 }
 
 - (UIView *)bottomView {
@@ -681,12 +661,6 @@
     }
     return _loadingImage;
 }
-- (UIImageView *)backgroundImage {
-    if (!_backgroundImage) {
-        _backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
-    }
-    return _backgroundImage;
-}
 
 - (ZQPlayer *)player {
     if (!_player) {
@@ -702,4 +676,9 @@
         _hideBottomTimer = nil;
     }
 }
+
+
+
+
+
 @end
