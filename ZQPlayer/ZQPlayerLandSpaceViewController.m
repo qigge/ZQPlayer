@@ -8,8 +8,8 @@
 
 #import "ZQPlayerLandSpaceViewController.h"
 
-#import <Masonry.h>
-#import <ZQPlayer.h>
+#import "Masonry.h"
+#import "ZQPlayer.h"
 
 @interface ZQPlayerLandSpaceViewController ()<ZQPlayerDelegate,UIGestureRecognizerDelegate>
 {

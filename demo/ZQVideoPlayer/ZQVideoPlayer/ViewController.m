@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import <Masonry.h>
+#import "Masonry.h"
 
 #import "ZQPlayerMaskView.h"
 #import <ZQPlayerLandSpaceViewController.h>

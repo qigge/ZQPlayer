@@ -8,7 +8,7 @@
 
 #import "ZQPlayerMaskView.h"
 
-#import <Masonry.h>
+#import "Masonry.h"
 
 @interface ZQPlayerMaskView ()<ZQPlayerDelegate,UIGestureRecognizerDelegate> {
     NSString *_playUrl;
