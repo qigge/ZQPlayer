@@ -7,7 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "Masonry.h"
+
+#import <Masonry.h>
+
 #import "ZQPlayerMaskView.h"
 
 
@@ -35,7 +37,7 @@
     [self.view addSubview:_playerMaskView];
     
     // 网络视频
-    NSString *videoUrl = @"http://220.170.49.104/13/h/g/h/u/hghumdhsmfhebwbhqbkluuxijccqdg/hc.yinyuetai.com/07350162CEBBD913D20F2F340BEE6084.mp4?sc=16011da08ddd8dc9&br=784&vid=3195269&aid=37&area=HT&vst=0&ptp=mv&rd=yinyuetai.com";
+    NSString *videoUrl = @"http://220.170.49.106/4/h/j/s/u/hjsubhupwgmcjyyrzrgtfwfeiymamh/he.yinyuetai.com/1832478_he_779C01462429A92CE2F6335CAFEDE9FA.flv?sc=e17309fb425cdf9f&br=3132&vid=96953&aid=1041&area=US&vst=2&ptp=mv&rd=yinyuetai.com";
     // 本地视频
     // NSString *videoUrl = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
     [_playerMaskView playWithVideoUrl:videoUrl];

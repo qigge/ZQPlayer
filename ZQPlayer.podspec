@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ZQPlayer"
-  s.version      = "0.1.4"
+  s.version      = "0.1.5"
   s.summary      = "一个基于AVPlayer封装的视频、音频播放器"
   s.description  = <<-DESC
                     ZQPlayer一个基于AVPlayer封装的视频、音频播放器

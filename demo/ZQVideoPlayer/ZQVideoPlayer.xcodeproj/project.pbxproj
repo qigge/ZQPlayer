@@ -13,22 +13,14 @@
 		21651CA72080C0FC0010F78F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21651CA62080C0FC0010F78F /* Assets.xcassets */; };
 		21651CAA2080C0FC0010F78F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21651CA82080C0FC0010F78F /* LaunchScreen.storyboard */; };
 		21651CAD2080C0FC0010F78F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CAC2080C0FC0010F78F /* main.m */; };
-		21651CD42080C1470010F78F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CBA2080C1470010F78F /* MASCompositeConstraint.m */; };
-		21651CD52080C1470010F78F /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CBD2080C1470010F78F /* MASConstraint.m */; };
-		21651CD62080C1470010F78F /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CBF2080C1470010F78F /* MASConstraintMaker.m */; };
-		21651CD72080C1470010F78F /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CC12080C1470010F78F /* MASLayoutConstraint.m */; };
-		21651CD82080C1470010F78F /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CC52080C1470010F78F /* MASViewAttribute.m */; };
-		21651CD92080C1470010F78F /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CC72080C1470010F78F /* MASViewConstraint.m */; };
-		21651CDA2080C1470010F78F /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CC92080C1470010F78F /* NSArray+MASAdditions.m */; };
-		21651CDB2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CCC2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		21651CDC2080C1470010F78F /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CCE2080C1470010F78F /* View+MASAdditions.m */; };
-		21651CDD2080C1470010F78F /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CD12080C1470010F78F /* ViewController+MASAdditions.m */; };
-		21651CE82081A5B50010F78F /* ZQPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CE42081A5B50010F78F /* ZQPlayer.m */; };
-		21651CE92081A5B50010F78F /* ZQPlayerImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21651CE52081A5B50010F78F /* ZQPlayerImage.bundle */; };
-		21651CEA2081A5B50010F78F /* ZQPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21651CE72081A5B50010F78F /* ZQPlayerMaskView.m */; };
+		21D3093421799C0100357794 /* ZQPlayerImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21D3092F21799C0000357794 /* ZQPlayerImage.bundle */; };
+		21D3093521799C0100357794 /* ZQPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D3093221799C0000357794 /* ZQPlayer.m */; };
+		21D3093621799C0100357794 /* ZQPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D3093321799C0000357794 /* ZQPlayerMaskView.m */; };
+		90F251221E4CF1A0D31E95D2 /* libPods-ZQVideoPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EA8D3502EE7D806BA1EA3D /* libPods-ZQVideoPlayer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09551A87A0D635C32FAAF1C7 /* Pods-ZQVideoPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZQVideoPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZQVideoPlayer/Pods-ZQVideoPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		21651C9A2080C0FC0010F78F /* ZQVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZQVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21651C9D2080C0FC0010F78F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21651C9E2080C0FC0010F78F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -39,36 +31,13 @@
 		21651CA92080C0FC0010F78F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21651CAB2080C0FC0010F78F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21651CAC2080C0FC0010F78F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		21651CB92080C1470010F78F /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
-		21651CBA2080C1470010F78F /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
-		21651CBB2080C1470010F78F /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
-		21651CBC2080C1470010F78F /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
-		21651CBD2080C1470010F78F /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
-		21651CBE2080C1470010F78F /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
-		21651CBF2080C1470010F78F /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
-		21651CC02080C1470010F78F /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
-		21651CC12080C1470010F78F /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
-		21651CC22080C1470010F78F /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
-		21651CC32080C1470010F78F /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
-		21651CC42080C1470010F78F /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
-		21651CC52080C1470010F78F /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		21651CC62080C1470010F78F /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
-		21651CC72080C1470010F78F /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
-		21651CC82080C1470010F78F /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		21651CC92080C1470010F78F /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		21651CCA2080C1470010F78F /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		21651CCB2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		21651CCC2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		21651CCD2080C1470010F78F /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
-		21651CCE2080C1470010F78F /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
-		21651CCF2080C1470010F78F /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		21651CD02080C1470010F78F /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		21651CD12080C1470010F78F /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		21651CE32081A5B50010F78F /* ZQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPlayer.h; sourceTree = "<group>"; };
-		21651CE42081A5B50010F78F /* ZQPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPlayer.m; sourceTree = "<group>"; };
-		21651CE52081A5B50010F78F /* ZQPlayerImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZQPlayerImage.bundle; sourceTree = "<group>"; };
-		21651CE62081A5B50010F78F /* ZQPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPlayerMaskView.h; sourceTree = "<group>"; };
-		21651CE72081A5B50010F78F /* ZQPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPlayerMaskView.m; sourceTree = "<group>"; };
+		21D3092F21799C0000357794 /* ZQPlayerImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZQPlayerImage.bundle; sourceTree = "<group>"; };
+		21D3093021799C0000357794 /* ZQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPlayer.h; sourceTree = "<group>"; };
+		21D3093121799C0000357794 /* ZQPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZQPlayerMaskView.h; sourceTree = "<group>"; };
+		21D3093221799C0000357794 /* ZQPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPlayer.m; sourceTree = "<group>"; };
+		21D3093321799C0000357794 /* ZQPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZQPlayerMaskView.m; sourceTree = "<group>"; };
+		22EA8D3502EE7D806BA1EA3D /* libPods-ZQVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZQVideoPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90353161F45405F53BBFCFEC /* Pods-ZQVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZQVideoPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZQVideoPlayer/Pods-ZQVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,17 +45,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90F251221E4CF1A0D31E95D2 /* libPods-ZQVideoPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B5DEC0D6536229C9179AEAC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				90353161F45405F53BBFCFEC /* Pods-ZQVideoPlayer.debug.xcconfig */,
+				09551A87A0D635C32FAAF1C7 /* Pods-ZQVideoPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		21651C912080C0FC0010F78F = {
 			isa = PBXGroup;
 			children = (
 				21651C9C2080C0FC0010F78F /* ZQVideoPlayer */,
 				21651C9B2080C0FC0010F78F /* Products */,
+				1B5DEC0D6536229C9179AEAC /* Pods */,
+				71C2FCA7874B1507FA3A9CEE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,8 +82,7 @@
 		21651C9C2080C0FC0010F78F /* ZQVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				21651CE22081A5B50010F78F /* ZQPlayer */,
-				21651CB82080C1470010F78F /* Masonry */,
+				21D3092E21799C0000357794 /* ZQPlayer */,
 				21651C9D2080C0FC0010F78F /* AppDelegate.h */,
 				21651C9E2080C0FC0010F78F /* AppDelegate.m */,
 				21651CA02080C0FC0010F78F /* ViewController.h */,
@@ -116,49 +96,25 @@
 			path = ZQVideoPlayer;
 			sourceTree = "<group>";
 		};
-		21651CB82080C1470010F78F /* Masonry */ = {
+		21D3092E21799C0000357794 /* ZQPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				21651CB92080C1470010F78F /* MASCompositeConstraint.h */,
-				21651CBA2080C1470010F78F /* MASCompositeConstraint.m */,
-				21651CBB2080C1470010F78F /* MASConstraint+Private.h */,
-				21651CBC2080C1470010F78F /* MASConstraint.h */,
-				21651CBD2080C1470010F78F /* MASConstraint.m */,
-				21651CBE2080C1470010F78F /* MASConstraintMaker.h */,
-				21651CBF2080C1470010F78F /* MASConstraintMaker.m */,
-				21651CC02080C1470010F78F /* MASLayoutConstraint.h */,
-				21651CC12080C1470010F78F /* MASLayoutConstraint.m */,
-				21651CC22080C1470010F78F /* Masonry.h */,
-				21651CC32080C1470010F78F /* MASUtilities.h */,
-				21651CC42080C1470010F78F /* MASViewAttribute.h */,
-				21651CC52080C1470010F78F /* MASViewAttribute.m */,
-				21651CC62080C1470010F78F /* MASViewConstraint.h */,
-				21651CC72080C1470010F78F /* MASViewConstraint.m */,
-				21651CC82080C1470010F78F /* NSArray+MASAdditions.h */,
-				21651CC92080C1470010F78F /* NSArray+MASAdditions.m */,
-				21651CCA2080C1470010F78F /* NSArray+MASShorthandAdditions.h */,
-				21651CCB2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.h */,
-				21651CCC2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.m */,
-				21651CCD2080C1470010F78F /* View+MASAdditions.h */,
-				21651CCE2080C1470010F78F /* View+MASAdditions.m */,
-				21651CCF2080C1470010F78F /* View+MASShorthandAdditions.h */,
-				21651CD02080C1470010F78F /* ViewController+MASAdditions.h */,
-				21651CD12080C1470010F78F /* ViewController+MASAdditions.m */,
-			);
-			path = Masonry;
-			sourceTree = "<group>";
-		};
-		21651CE22081A5B50010F78F /* ZQPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				21651CE52081A5B50010F78F /* ZQPlayerImage.bundle */,
-				21651CE32081A5B50010F78F /* ZQPlayer.h */,
-				21651CE42081A5B50010F78F /* ZQPlayer.m */,
-				21651CE62081A5B50010F78F /* ZQPlayerMaskView.h */,
-				21651CE72081A5B50010F78F /* ZQPlayerMaskView.m */,
+				21D3092F21799C0000357794 /* ZQPlayerImage.bundle */,
+				21D3093021799C0000357794 /* ZQPlayer.h */,
+				21D3093121799C0000357794 /* ZQPlayerMaskView.h */,
+				21D3093221799C0000357794 /* ZQPlayer.m */,
+				21D3093321799C0000357794 /* ZQPlayerMaskView.m */,
 			);
 			name = ZQPlayer;
 			path = ../../../ZQPlayer;
+			sourceTree = "<group>";
+		};
+		71C2FCA7874B1507FA3A9CEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22EA8D3502EE7D806BA1EA3D /* libPods-ZQVideoPlayer.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +124,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 21651CB02080C0FC0010F78F /* Build configuration list for PBXNativeTarget "ZQVideoPlayer" */;
 			buildPhases = (
+				7496F9B09D1E97A708690CC0 /* [CP] Check Pods Manifest.lock */,
 				21651C962080C0FC0010F78F /* Sources */,
 				21651C972080C0FC0010F78F /* Frameworks */,
 				21651C982080C0FC0010F78F /* Resources */,
@@ -222,31 +179,46 @@
 				21651CAA2080C0FC0010F78F /* LaunchScreen.storyboard in Resources */,
 				21651CA72080C0FC0010F78F /* Assets.xcassets in Resources */,
 				21651CA52080C0FC0010F78F /* Main.storyboard in Resources */,
-				21651CE92081A5B50010F78F /* ZQPlayerImage.bundle in Resources */,
+				21D3093421799C0100357794 /* ZQPlayerImage.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7496F9B09D1E97A708690CC0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZQVideoPlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		21651C962080C0FC0010F78F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21651CDB2080C1470010F78F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				21651CA22080C0FC0010F78F /* ViewController.m in Sources */,
-				21651CEA2081A5B50010F78F /* ZQPlayerMaskView.m in Sources */,
-				21651CD92080C1470010F78F /* MASViewConstraint.m in Sources */,
+				21D3093521799C0100357794 /* ZQPlayer.m in Sources */,
+				21D3093621799C0100357794 /* ZQPlayerMaskView.m in Sources */,
 				21651CAD2080C0FC0010F78F /* main.m in Sources */,
-				21651CDC2080C1470010F78F /* View+MASAdditions.m in Sources */,
-				21651CE82081A5B50010F78F /* ZQPlayer.m in Sources */,
-				21651CD42080C1470010F78F /* MASCompositeConstraint.m in Sources */,
-				21651CD82080C1470010F78F /* MASViewAttribute.m in Sources */,
-				21651CD62080C1470010F78F /* MASConstraintMaker.m in Sources */,
-				21651CDA2080C1470010F78F /* NSArray+MASAdditions.m in Sources */,
-				21651CDD2080C1470010F78F /* ViewController+MASAdditions.m in Sources */,
-				21651CD52080C1470010F78F /* MASConstraint.m in Sources */,
-				21651CD72080C1470010F78F /* MASLayoutConstraint.m in Sources */,
 				21651C9F2080C0FC0010F78F /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,6 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../ZQPlayer\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -374,6 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../ZQPlayer\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -383,9 +357,15 @@
 		};
 		21651CB12080C0FC0010F78F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90353161F45405F53BBFCFEC /* Pods-ZQVideoPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+				);
 				INFOPLIST_FILE = ZQVideoPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtyfxl.ZQVideoPlayer;
@@ -396,9 +376,15 @@
 		};
 		21651CB22080C0FC0010F78F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09551A87A0D635C32FAAF1C7 /* Pods-ZQVideoPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+				);
 				INFOPLIST_FILE = ZQVideoPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xtyfxl.ZQVideoPlayer;

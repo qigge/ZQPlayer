@@ -8,7 +8,7 @@
 
 #import "ZQPlayerMaskView.h"
 
-#import "Masonry.h"
+#import <Masonry.h>
 
 @interface ZQPlayerMaskView ()<ZQPlayerDelegate,UIGestureRecognizerDelegate> {
     NSString *_playUrl;
@@ -306,7 +306,10 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerLoadTime:loadTime:)]) {
         [self.delegate ZQPlayerLoadTime:player loadTime:time];
     }
-    [_progressView setProgress:time / player.timeInterval animated:YES];
+    // 判断视频长度
+    if (player.timeInterval > 0) {
+        [_progressView setProgress:time / player.timeInterval animated:YES];
+    }
 }
 
 /**
