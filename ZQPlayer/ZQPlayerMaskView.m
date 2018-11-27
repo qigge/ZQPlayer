@@ -202,7 +202,11 @@
     if (videoUrl && videoUrl.length > 0 && ![_playUrl isEqualToString:videoUrl]) {
         
         self.videoSlider.value = 0;
+        self.progressView.progress =0;
         _currentTimeLabel.text = @"00:00";
+        _totalTimeLabel.text = @"00:00";
+        
+        [self stopLoading];
         
         _playUrl = videoUrl;
         if (_isWiFi) {
@@ -684,6 +688,7 @@
 - (UIImageView *)backgroundImage {
     if (!_backgroundImage) {
         _backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
+        _backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _backgroundImage;
 }

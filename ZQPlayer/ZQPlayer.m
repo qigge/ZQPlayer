@@ -43,6 +43,8 @@
         _player = [AVPlayer playerWithPlayerItem:_playerItme];
         _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
         _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+        _playerLayer.backgroundColor = [UIColor clearColor].CGColor;
+
     }
     return self;
 }
