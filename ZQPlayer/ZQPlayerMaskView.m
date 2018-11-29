@@ -206,8 +206,6 @@
         _currentTimeLabel.text = @"00:00";
         _totalTimeLabel.text = @"00:00";
         
-        [self stopLoading];
-        
         _playUrl = videoUrl;
         if (_isWiFi) {
             [_player nextWithUrl:videoUrl];
@@ -334,6 +332,7 @@
     else if (state == ZQPlayerStatePause) {
         _playBtn.selected = NO;
         [self showPlayerSubview];
+        [self stopLoading];
     }
     else if (state == ZQPlayerStateBufferEmpty) {
         [self startLoading];
@@ -437,12 +436,9 @@
 }
 // 加载完成
 - (void)stopLoading {
-    if (!_player.isPlaying) {
-        return;
-    }
+    self.loadingView.hidden = YES;
+    [self.loadingImage.layer removeAnimationForKey:@"loading"];
     if (_player.isPlaying) {
-        self.loadingView.hidden = YES;
-        [self.loadingImage.layer removeAnimationForKey:@"loading"];
         // 自动隐藏控件
         [self hidePlayerSubviewWithTimer];
     }
