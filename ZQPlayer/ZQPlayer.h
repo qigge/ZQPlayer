@@ -16,7 +16,8 @@ typedef NS_ENUM(NSUInteger, ZQPlayerState) {
     ZQPlayerStatePause, // 暂停
     ZQPlayerStateStop, // 播放完毕
     ZQPlayerStateBufferEmpty, // 缓冲中
-    ZQPlayerStateKeepUp // 缓冲完成
+    ZQPlayerStateKeepUp, // 缓冲完成
+    ZQPlayerStateFailed, // 播放器准备失败、网络原因，格式原因
 };
 
 @class ZQPlayer;
