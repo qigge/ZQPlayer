@@ -183,7 +183,7 @@
                 if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
                     [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateReadyToPlay];
                 }
-            }else if (_player.status == AVPlayerStatusFailed) {
+            }else if (_playerItme.status == AVPlayerStatusFailed) {
                 if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
                     [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateFailed];
                 }
