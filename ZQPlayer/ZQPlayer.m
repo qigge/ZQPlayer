@@ -120,6 +120,27 @@
     }
 }
 
+- (void)stop {
+    _isPlaying = NO;
+    [_player pause];
+    // 移除之前的时间监听
+    [self removeTimeObserver];
+    
+    if (_playerItme) {
+        [_playerItme removeObserver:self forKeyPath:@"status"];
+        [_playerItme removeObserver:self forKeyPath:@"loadedTimeRanges"];
+        [_playerItme removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+        [_playerItme removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_playerItme];
+        _playerItme = nil;
+    }
+    [_player replaceCurrentItemWithPlayerItem:_playerItme];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
+        [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateStop];
+    }
+}
+
+
 
 #pragma mark - Priva Method
 //设置播放进度和时间

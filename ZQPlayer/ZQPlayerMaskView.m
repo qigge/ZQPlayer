@@ -199,7 +199,7 @@
 
 
 - (void)playWithVideoUrl:(NSString *)videoUrl {
-    if (videoUrl && videoUrl.length > 0 && ![_playUrl isEqualToString:videoUrl]) {
+    if (videoUrl && videoUrl.length > 0) {
         
         self.videoSlider.value = 0;
         self.progressView.progress =0;
@@ -211,6 +211,9 @@
             [_player nextWithUrl:videoUrl];
             [_player play];
         }
+    }else {
+        [_player stop];
+        _totalTimeLabel.text = @"00:00";
     }
 }
 
@@ -341,6 +344,7 @@
         [self stopLoading];
     }
     else if (state == ZQPlayerStateStop) {
+        [self stopLoading];
         _playBtn.selected = NO;
         _currentTimeLabel.text = @"00:00";
         [_videoSlider setValue:0 animated:YES];

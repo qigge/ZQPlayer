@@ -65,6 +65,8 @@ typedef NS_ENUM(NSUInteger, ZQPlayerState) {
 - (void)play;
 /** 暂停 */
 - (void)pause;
+/** 停止 */
+- (void)stop;
 
 // 是否正在播放
 @property (nonatomic, assign, readonly) BOOL isPlaying;
