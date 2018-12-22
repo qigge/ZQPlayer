@@ -96,6 +96,10 @@
     [_bottomView addSubview:self.totalTimeLabel];
     [self addSubview:self.loadingView];
     
+    [_backgroundImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
+    
     [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self);
         make.height.mas_equalTo(30);
@@ -343,7 +347,7 @@
     else if (state == ZQPlayerStateKeepUp) {
         [self stopLoading];
     }
-    else if (state == ZQPlayerStateStop) {
+    else if (state == ZQPlayerStateStop || state == ZQPlayerStateFailed) {
         [self stopLoading];
         _playBtn.selected = NO;
         _currentTimeLabel.text = @"00:00";
