@@ -11,7 +11,6 @@
 #import "Masonry.h"
 
 @interface ZQPlayerMaskView ()<ZQPlayerDelegate,UIGestureRecognizerDelegate> {
-    NSString *_playUrl;
     BOOL _isDragSlider;
 }
 
@@ -203,22 +202,14 @@
 
 
 - (void)playWithVideoUrl:(NSString *)videoUrl {
+    [_player stop];
+    _player.playUrl = videoUrl;
     if (videoUrl && videoUrl.length > 0) {
-        
         self.videoSlider.value = 0;
         self.progressView.progress =0;
         _currentTimeLabel.text = @"00:00";
-        _totalTimeLabel.text = @"00:00";
-        
-        _playUrl = videoUrl;
-        if (_isWiFi) {
-            [_player nextWithUrl:videoUrl];
-            [_player play];
-        }
-    }else {
-        [_player stop];
-        _totalTimeLabel.text = @"00:00";
     }
+    _totalTimeLabel.text = @"00:00";
 }
 
 #pragma mark - private method
@@ -238,7 +229,6 @@
                                                                  preferredStyle:UIAlertControllerStyleAlert];
         [alertC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             self.isWiFi = YES;
-            [self.player nextWithUrl:self->_playUrl];
             [self.player play];
         }]];
         [alertC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -329,6 +319,7 @@
     }
     if (state == ZQPlayerStatePlaying) {
         _playBtn.selected = YES;
+        self.backgroundImage.image = nil;
         if (_player.isBuffering) {
             [self startLoading];
         }else {

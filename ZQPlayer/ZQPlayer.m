@@ -103,6 +103,9 @@
 #pragma mark - 公开的方法
 - (void)play {
     if (!_isPlaying) {
+        if (!_playerItme) {
+            [self nextWithUrl:_playUrl];
+        }
         [_player play];
         _isPlaying = YES;
         if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
