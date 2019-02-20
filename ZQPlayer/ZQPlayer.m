@@ -209,10 +209,10 @@
                     [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateReadyToPlay];
                 }
             }else if (_playerItme.status == AVPlayerStatusFailed) {
-                _isPlaying = NO;
                 if (self.delegate && [self.delegate respondsToSelector:@selector(ZQPlayerStateChange:state:)]) {
                     [self.delegate ZQPlayerStateChange:self state:ZQPlayerStateFailed];
                 }
+                [self stop];
             }
         } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
             CMTimeRange range = [_playerItme.loadedTimeRanges.firstObject CMTimeRangeValue];
