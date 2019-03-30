@@ -68,6 +68,11 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_playerItme];
         _playerItme = nil;
     }
+    if (!url) {
+        return;
+    }
+    _playUrl = url;
+    
     NSURL *videoUrl;
     if ([url containsString:@"http"]) {
         videoUrl = [self translateIllegalCharacterWtihUrlStr:url];
